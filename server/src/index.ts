@@ -20,7 +20,7 @@ app.post("/decks", async (req: Request, res: Response) => {
   res.json(createdDeck);
 });
 
-mongoose.connect("mongodb://localhost:27017/brainstorm_app").then(() => {
+mongoose.connect("mongodb://localhost:27017/desksApp").then(() => {
   console.log(`Listening on port ${PORT}`);
   app.listen(PORT);
 });
