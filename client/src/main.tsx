@@ -1,10 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import CssBaseline from "@mui/material/CssBaseline";
+import Layout from "@/components/Layout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Desk from "pages/Desk";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/desks/:deskId",
+    element: <Desk />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <>
+    <CssBaseline />
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
+  </>
+);

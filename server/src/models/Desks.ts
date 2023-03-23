@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 //const ObjectId = mongoose.Types.ObjectId;
 
-const DeckSchema = new Schema({
+const DeskSchema = new Schema({
   title: String,
 });
 
-const DeckModel = mongoose.model("Deck", DeckSchema);
+const DeskModel = mongoose.model("Desk", DeskSchema);
 
-export default DeckModel;
+export default DeskModel;
