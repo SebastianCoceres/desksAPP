@@ -1,10 +1,17 @@
 import { config } from "dotenv";
 config();
 
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
-import DeskModel from "./models/Desks";
 import cors from "cors";
+import {
+  getDesks,
+  createDesk,
+  deleteDesk,
+  editDesk,
+} from "./controllers/desksController";
+
+import { createTask } from "./controllers/tasksController";
 
 const PORT = 5000;
 
@@ -16,38 +23,13 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/desks", async (req: Request, res: Response) => {
-  const desks = await DeskModel.find();
-  res.json(desks);
-});
+app.get("/desks", getDesks);
+app.get("/desks/:deskId", getDesks);
+app.post("/desks", createDesk);
+app.delete("/desks/:deskId", deleteDesk);
+app.put("/desks/:deskId", editDesk);
 
-app.post("/desks", async (req: Request, res: Response) => {
-  const newDesk = new DeskModel({
-    title: req.body.title || "no title",
-  });
-  const createdDesk = await newDesk.save();
-  res.json(createdDesk);
-});
-
-app.delete("/desks/:deskId", async (req: Request, res: Response) => {
-  const deskId = req.params.deskId;
-  const deletedDesk = await DeskModel.findByIdAndDelete(deskId);
-  res.json({
-    message: "successfully deleted desk",
-    deletedDesk,
-  });
-});
-
-app.put("/desks/:deskId", async (req: Request, res: Response) => {
-  const deskId = req.params.deskId;
-  const updatedDesk = await DeskModel.findByIdAndUpdate(deskId, {
-    title: req.body.title,
-  });
-  res.json({
-    message: "successfully updated desk",
-    updatedDesk,
-  });
-});
+app.post("/desks/:deskId/tasks", createTask);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`Listening on port ${PORT}`);
