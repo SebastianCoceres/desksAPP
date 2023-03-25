@@ -13,7 +13,7 @@ import {
   TextField,
 } from "@mui/material";
 import Desks from "@/components/Desks/";
-import { getDesks, createDesk, deleteDesk, editDesk } from "api/desks";
+import { getDesks, createDesk, deleteDesk, editDesk } from "api/desksApi";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -51,6 +51,9 @@ function App() {
 
   return (
     <Container className="App" maxWidth="md">
+      <Box component="h1" sx={{ color: "white" }}>
+        Home
+      </Box>
       <Box component="form" onSubmit={handleCreateDesk}>
         <FormControl sx={{ display: "flex", flexDirection: "row" }}>
           <TextField

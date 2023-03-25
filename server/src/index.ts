@@ -9,6 +9,7 @@ import {
   createDesk,
   deleteDesk,
   editDesk,
+  getDesksById,
 } from "./controllers/desksController";
 
 import { createTask } from "./controllers/tasksController";
@@ -24,7 +25,7 @@ app.use(
 app.use(express.json());
 
 app.get("/desks", getDesks);
-app.get("/desks/:deskId", getDesks);
+app.get("/desks/:deskId", getDesksById);
 app.post("/desks", createDesk);
 app.delete("/desks/:deskId", deleteDesk);
 app.put("/desks/:deskId", editDesk);

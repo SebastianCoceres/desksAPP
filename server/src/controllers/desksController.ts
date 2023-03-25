@@ -2,13 +2,22 @@ import { Request, Response } from "express";
 import DeskModel from "../models/Desks";
 
 export async function getDesks(req: Request, res: Response) {
-  const desks = await DeskModel.find();
-  res.json(desks);
+  try {
+    const desks = await DeskModel.find();
+    res.json(desks);
+  } catch (err) {
+    res.status(400).send("Could not get desks");
+  }
 }
 
 export async function getDesksById(req: Request, res: Response) {
-  const desks = await DeskModel.findById(req.params.deskId);
-  res.json(desks);
+  try {
+    const id = req.params.deskId;
+    const desks = await DeskModel.findById(id);
+    res.json(desks);
+  } catch (err) {
+    res.status(400).send(`There is no desk with id: ${req.params.deskId}`);
+  }
 }
 
 export async function createDesk(req: Request, res: Response) {

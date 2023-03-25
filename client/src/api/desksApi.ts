@@ -6,7 +6,7 @@ export async function getDesks(): Promise<TDesk[]> {
   return res.json();
 }
 
-export async function getDesksById(id: string): Promise<TDesk[]> {
+export async function getDesksById(id: string): Promise<TDesk> {
   const res = await fetch(`${API_URL}/desks/${id}`);
   return res.json();
 }

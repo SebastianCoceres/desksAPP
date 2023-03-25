@@ -15,12 +15,13 @@ export async function createTask(req: Request, res: Response) {
 
     const task = new TaskModel({
       title: taskData.title,
+      description: taskData.description,
+      checked: taskData.checked,
       desk: desk._id,
     });
 
     await task.save();
-
-    desk.tasks.push({title: taskData.title, task: task._id});
+    desk.tasks.push({ title: taskData.title, task: task._id });
     await desk.save();
 
     return res.status(201).json(task);

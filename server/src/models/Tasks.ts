@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
   title: String,
+  description: String,
+  checked: Boolean,
   desk: {
     type: Schema.Types.ObjectId,
     ref: "Desk",
