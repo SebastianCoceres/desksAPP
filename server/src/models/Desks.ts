@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const DeskSchema = new Schema({
   title: String,
-  tasks: [{ title: String, task: { type: Schema.Types.ObjectId, ref: 'Task' } }]
+  tasks: [{ title: String, taskId: { type: Schema.Types.ObjectId, ref: 'Task' } }]
 });
 
 const DeskModel = mongoose.model("Desk", DeskSchema);

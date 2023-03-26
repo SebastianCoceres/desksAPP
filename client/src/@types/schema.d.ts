@@ -3,9 +3,16 @@ import { type } from "os";
 export type TDesk = {
   _id: string;
   title: string;
-  tasks: TTask[];
+  tasks: TTaskRef[];
   __v: number;
 };
+
+export type TTaskRef = {
+  _id: string;
+  title: string;
+  taskId: string;
+};
+
 
 export type TTask = {
   _id: string;

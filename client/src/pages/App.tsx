@@ -83,6 +83,7 @@ function App() {
       />
       <Dialog
         open={editModalOpen}
+        maxWidth={"sm"} fullWidth={true}
         onClose={() => {
           handleEditDesk(editModalContent.id, editModalContent.title),
             setEditModalOpen(false);

@@ -29,9 +29,31 @@ function Tasks({ data, handlers = {} }: any) {
   // }
   return (
     <Grid container spacing={2} sx={{ marginTop: "1em" }}>
-      {data.map((task: TTask) => (
+      {data.map((task: any) => (
         <Grid key={task._id} item xs={4}>
           <Item>
+            <Stack
+              direction="row"
+              sx={{
+                position: "absolute",
+                top: "5px",
+                right: "5px",
+              }}
+            >
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={() => handlers.handleDeleteTask(task.taskId)}
+                sx={{
+                  "&:hover": {
+                    background: "#3f51b5",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </Stack>
             <p>{task.title}</p>
           </Item>
         </Grid>
