@@ -1,5 +1,10 @@
 import { type } from "os";
 
+type SetState<T> = (
+  state: T | ((prevState: T) => T),
+  callback?: () => void
+) => void;
+
 export type TDesk = {
   _id: string;
   title: string;
@@ -7,18 +12,15 @@ export type TDesk = {
   __v: number;
 };
 
-export type TTaskRef = {
-  _id: string;
-  title: string;
-  taskId: string;
-};
-
-
 export type TTask = {
   _id: string;
   title: string;
   description: string;
   checked: boolean;
-  desk: string;
-  __v: number;
+};
+
+export type TNewTask = {
+  title: string;
+  description: string;
+  checked: boolean;
 };

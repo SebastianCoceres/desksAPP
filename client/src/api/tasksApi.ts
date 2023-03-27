@@ -15,14 +15,14 @@ export async function createTask({
   title,
   description,
   checked,
-  desk,
+  deskId,
 }: {
   title: string;
   description: string;
   checked: boolean;
-  desk: string;
-}): Promise<TTask> {
-  const res = await fetch(`${API_URL}/desks/${desk}/tasks`, {
+  deskId: string;
+}): Promise<TTask[]> {
+  const res = await fetch(`${API_URL}/desks/${deskId}/tasks`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,14 +42,14 @@ export async function deleteTask({ taskId, deskId }: any) {
   });
 }
 
-// export async function editTask(deskId: string, newTitle: string) {
-//   await fetch(`${API_URL}/tasks/${deskId}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       title: newTitle,
-//     }),
-//   });
-// }
+export async function editTask(deskId: string, taskId: string,  newTaskData: any) {
+  await fetch(`${API_URL}/desks/${deskId}/tasks/${taskId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: newTaskData
+    }),
+  });
+}

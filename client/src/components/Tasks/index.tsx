@@ -1,8 +1,8 @@
-import { TTask } from "@/@types/schema";
 import { styled } from "@mui/material/styles";
-import { Paper, IconButton, Grid, Stack } from "@mui/material";
+import { Paper, IconButton, Grid, Stack, Box, Checkbox } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { SetState, TTask } from "@/@types/schema";
 
 const Item = styled(Paper)(() => ({
   width: "100%",
@@ -19,7 +19,9 @@ const Item = styled(Paper)(() => ({
   },
 }));
 
-function Tasks({ data, handlers = {} }: any) {
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+function Tasks({ data, handlers }: { data: TTask[]; handlers: any }) {
   // function editDesk(teskId: any, title: any) {
   //   handlers.setEditModalOpen(true);
   //   handlers.setEditModalContent({
@@ -27,10 +29,11 @@ function Tasks({ data, handlers = {} }: any) {
   //     id: teskId,
   //   });
   // }
+
   return (
     <Grid container spacing={2} sx={{ marginTop: "1em" }}>
-      {data.map((task: any) => (
-        <Grid key={task._id} item xs={4}>
+      {data.map((task: TTask) => (
+        <Grid key={task._id} item xs={12} md={4}>
           <Item>
             <Stack
               direction="row"
@@ -43,7 +46,7 @@ function Tasks({ data, handlers = {} }: any) {
               <IconButton
                 aria-label="delete"
                 size="small"
-                onClick={() => handlers.handleDeleteTask(task.taskId)}
+                onClick={() => handlers.handleDeleteTask(task._id)}
                 sx={{
                   "&:hover": {
                     background: "#3f51b5",
@@ -54,7 +57,10 @@ function Tasks({ data, handlers = {} }: any) {
                 <DeleteIcon fontSize="small" />
               </IconButton>
             </Stack>
-            <p>{task.title}</p>
+            <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
+              <Checkbox {...label} checked={task.checked ? true : false} />
+              <p>{task.title}</p>
+            </Box>
           </Item>
         </Grid>
       ))}
