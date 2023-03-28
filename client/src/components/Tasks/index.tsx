@@ -2,7 +2,8 @@ import { styled } from "@mui/material/styles";
 import { Paper, IconButton, Grid, Stack, Box, Checkbox } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { SetState, TTask } from "@/@types/schema";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { TTask } from "@/@types/schema";
 
 const Item = styled(Paper)(() => ({
   width: "100%",
@@ -22,14 +23,6 @@ const Item = styled(Paper)(() => ({
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function Tasks({ data, handlers }: { data: TTask[]; handlers: any }) {
-  // function editDesk(teskId: any, title: any) {
-  //   handlers.setEditModalOpen(true);
-  //   handlers.setEditModalContent({
-  //     title,
-  //     id: teskId,
-  //   });
-  // }
-
   return (
     <Grid container spacing={2} sx={{ marginTop: "1em" }}>
       {data.map((task: TTask) => (
@@ -44,6 +37,38 @@ function Tasks({ data, handlers }: { data: TTask[]; handlers: any }) {
               }}
             >
               <IconButton
+                aria-label="Edit"
+                size="small"
+                onClick={() => {
+                  handlers.setTaskToEdit({ ...task });
+                  handlers.setSeeTaskModalOpen(true);
+                }}
+                sx={{
+                  "&:hover": {
+                    background: "#3f51b5",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <VisibilityIcon fontSize="small" />
+              </IconButton>
+              <IconButton
+                aria-label="Edit"
+                size="small"
+                onClick={() => {
+                  handlers.setEditTaskModalOpen(true);
+                  handlers.setTaskToEdit({ ...task });
+                }}
+                sx={{
+                  "&:hover": {
+                    background: "#3f51b5",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton
                 aria-label="delete"
                 size="small"
                 onClick={() => handlers.handleDeleteTask(task._id)}
@@ -57,8 +82,17 @@ function Tasks({ data, handlers }: { data: TTask[]; handlers: any }) {
                 <DeleteIcon fontSize="small" />
               </IconButton>
             </Stack>
-            <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox {...label} checked={task.checked ? true : false} />
+            <Box
+              component="div"
+              sx={{ display: "flex", alignItems: "center", width: "100%" }}
+            >
+              <Checkbox
+                {...label}
+                checked={task.checked}
+                onClick={() =>
+                  handlers.handleEditTask({ ...task, checked: !task.checked })
+                }
+              />
               <p>{task.title}</p>
             </Box>
           </Item>

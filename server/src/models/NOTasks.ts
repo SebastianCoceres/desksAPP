@@ -7,8 +7,11 @@ const TaskSchema = new Schema({
   description: String,
   checked: Boolean,
   desk: {
-    type: Schema.Types.ObjectId,
-    ref: "Desk",
+    title: String,
+    deskId: {
+      type: Schema.Types.ObjectId,
+      ref: "Desk",
+    },
   },
 });
 

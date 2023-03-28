@@ -42,14 +42,17 @@ export async function deleteTask({ taskId, deskId }: any) {
   });
 }
 
-export async function editTask(deskId: string, taskId: string,  newTaskData: any) {
-  await fetch(`${API_URL}/desks/${deskId}/tasks/${taskId}`, {
+export async function editTask(
+  deskId: string,
+  newTaskData: TTask
+) {
+  await fetch(`${API_URL}/desks/${deskId}/tasks/${newTaskData._id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      data: newTaskData
+      ...newTaskData,
     }),
   });
 }

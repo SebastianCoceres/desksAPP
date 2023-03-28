@@ -12,7 +12,7 @@ import {
   getDesksById,
 } from "./controllers/desksController";
 
-import { createTask, deleteTask } from "./controllers/tasksController";
+import { createTask, deleteTask, editTask } from "./controllers/tasksController";
 
 const PORT = 5000;
 
@@ -32,6 +32,7 @@ app.put("/desks/:deskId", editDesk);
 
 app.post("/desks/:deskId/tasks", createTask);
 app.delete("/desks/:deskId/tasks/:taskId", deleteTask);
+app.put("/desks/:deskId/tasks/:taskId", editTask);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`Listening on port ${PORT}`);

@@ -1,26 +1,26 @@
 import ReactDOM from "react-dom/client";
-import App from "./pages/App";
 import CssBaseline from "@mui/material/CssBaseline";
 import Layout from "@/components/Layout";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import App from "pages/App";
 import Desk from "pages/Desk";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/desks/:deskId",
-    element: <Desk />,
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <CssBaseline />
-    <Layout>
-      <RouterProvider router={router} />
-    </Layout>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          element={
+            <Layout>
+              <Outlet />
+            </Layout>
+          }
+        >
+          <Route path="/" element={<App />} />
+          <Route path="/desks/:deskId" element={<Desk />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </>
 );
